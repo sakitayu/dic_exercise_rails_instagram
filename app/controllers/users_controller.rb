@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(image: params[:user][:image])
+    if @user.update(name: params[:user][:name]) || @user.update(image: params[:user][:image])
       redirect_to user_path(@user.id), notice: "プロフフィールを編集しました！"
     else
       render :edit

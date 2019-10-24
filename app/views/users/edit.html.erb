@@ -1,7 +1,8 @@
 <%= form_with(model: @user, local: true, url: user_path(@user.id)) do |f| %>  
   <%= f.label :'名前' %>
   <br>
-  <%= @user.name %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
   <br>
   <%= f.label :'アカウント画像' %>
   <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
