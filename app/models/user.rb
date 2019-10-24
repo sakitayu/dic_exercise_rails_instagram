@@ -4,6 +4,7 @@ class User < ApplicationRecord
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   before_validation { email.downcase! }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
-  #has_many :blogs #←間違ってたら修正する
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  has_many :blogs
+  mount_uploader :image, ImageUploader
 end
