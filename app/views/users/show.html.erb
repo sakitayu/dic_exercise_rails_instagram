@@ -1,7 +1,8 @@
-<h1>名前: <%= @user.name %></h1>
+<h1><%= @user.name %>のプロフィールページ</h1>
 
+<% if current_user.id == @user.id %>
 <p>メールアドレス: <%= @user.email %></p>
-
+<% end %>
 <% if @user.image.file.nil? %>
   <% else %>
   <%= image_tag @user.image.url %>
