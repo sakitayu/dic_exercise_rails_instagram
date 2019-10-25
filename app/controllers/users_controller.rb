@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :correct_user, only: [:edit, :update]
 
   def new
     @user = User.new
@@ -37,4 +38,10 @@ class UsersController < ApplicationController
                                  :password_confirmation, :image, :image_cache )
   end
 
+  def correct_user
+    user = User.find(params[:id])
+    if current_user != user
+      redirect_to "/"
+    end
+  end
 end
