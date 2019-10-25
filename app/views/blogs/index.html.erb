@@ -6,8 +6,9 @@
 
 <% @blogs.each do |blog| %>
   <tr>
-    <td>投稿者→<%= blog.user.name %></td>
-    <td><%= blog.content %></td>
+    <td>投稿者→<%= link_to "#{blog.user.name}", user_path(blog.user.id) %></td>
+    <td>投稿日→<%= blog.user.created_at.try(:strftime,"%m月%d日") %></td>
+    <td>文章→<%= blog.content %></td>
     <td><%= link_to '詳細', blog_path(blog.id) %></td>
     <% if current_user.id == blog.user.id %>
     <td><%= link_to "編集", edit_blog_path(blog.id) %></td>
