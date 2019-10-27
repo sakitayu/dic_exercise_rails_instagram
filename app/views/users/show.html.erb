@@ -11,3 +11,5 @@
 <% if current_user.id == @user.id %>
 <%= link_to "プロフィールを編集", edit_user_path(@user.id) %>
 <% end %>
+
+<%= link_to "お気に入り", likes_user_path(@user.id) %>

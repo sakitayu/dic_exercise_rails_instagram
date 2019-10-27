@@ -17,7 +17,7 @@
     <% if logged_in? %>
       <%= link_to "ほ~む", blogs_path %>
       <%= link_to "プロフィール", user_path(current_user.id) %>
-      <%= link_to "お気に入り", user_path(current_user.id) %>
+      <%= link_to "お気に入り", likes_user_path(current_user.id) %>
       <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
     <% else %>
       <%= link_to "登録する", new_user_path %>

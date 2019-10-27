@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_24_050242) do
+ActiveRecord::Schema.define(version: 2019_10_25_085737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2019_10_24_050242) do
     t.index ["user_id"], name: "index_blogs_on_user_id"
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "blog_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_id"], name: "index_favorites_on_blog_id"
+    t.index ["user_id", "blog_id"], name: "index_favorites_on_user_id_and_blog_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -35,4 +45,6 @@ ActiveRecord::Schema.define(version: 2019_10_24_050242) do
   end
 
   add_foreign_key "blogs", "users"
+  add_foreign_key "favorites", "blogs"
+  add_foreign_key "favorites", "users"
 end

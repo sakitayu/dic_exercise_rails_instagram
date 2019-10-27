@@ -3,7 +3,6 @@
 <%= link_to '投稿する', new_blog_path %>
 
 <table>
-
 <% @blogs.each do |blog| %>
   <tr>
     <td>投稿者→<%= link_to "#{blog.user.name}", user_path(blog.user.id) %></td>
@@ -12,19 +11,25 @@
     <td><%= link_to '詳細', blog_path(blog.id) %></td>
     <% if current_user.id == blog.user.id %>
     <td><%= link_to "編集", edit_blog_path(blog.id) %></td>
-    <% end %>
-    
     <td>
       <%= link_to '削除', blog_path(blog.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %>
     </td>
+    <% end %>
   </tr>
   <tr>
-  <td>
-    <% if blog.image.file.nil? %>
+    <td>
+      <% if blog.image.file.nil? %>
+        <% else %>
+        <%= image_tag blog.image.url %>
+      <% end %>
+    </td>
+    <td>
+      <% if !Favorite.exists?(user_id:current_user.id,blog_id:blog.id) %>
+      <%= link_to "お気に入りに追加",likes_user_path(blog),method: :blog %>
       <% else %>
-      <%= image_tag blog.image.url %>
-    <% end %>
-  </td>
+      <%= link_to "お気に入り解除",likes_user_path(blog),method: :delete %>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>
