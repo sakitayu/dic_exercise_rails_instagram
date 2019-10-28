@@ -24,6 +24,14 @@
         <%= image_tag favorite.blog.image.url %>
       <% end %>
     </td>
+    <td>
+    <% @favorite = current_user.favorites.find_by(blog_id: favorite.blog.id) %>
+    <% if @favorite.present? %>
+    <%= link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+      <% else %>
+    <%= link_to 'お気に入りする', favorites_path(blog_id: favorite.blog.id), method: :post, class: 'btn btn-primary' %>
+    <% end %>
+    </td>
   </tr>
 <% end %>
 

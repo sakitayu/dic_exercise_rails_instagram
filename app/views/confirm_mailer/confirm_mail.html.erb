@@ -1,0 +1,10 @@
+<h1>以下の内容を投稿しました</h1>
+
+<div>
+  <div>
+    <%= image_tag(@confirm.image.url) if @confirm.image && @confirm.image.url %>
+  </div>
+  <div>
+    <%= @confirm.content %>
+  </div>
+</div>
