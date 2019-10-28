@@ -1,4 +1,4 @@
-<h1>いんすたぐらむ</h1>
+<h1>いんすたぐらむのほ〜む画面(タイムライン)</h1>
 
 <%= link_to '投稿する', new_blog_path %>
 
@@ -24,10 +24,10 @@
       <% end %>
     </td>
     <td>
-      <% if !Favorite.exists?(user_id:current_user.id,blog_id:blog.id) %>
-      <%= link_to "お気に入りに追加",likes_user_path(blog),method: :blog %>
+      <% if !Favorite.exists?(user_id:current_user.id, blog_id:blog.id) %>
+      <%= link_to "お気に入りに追加", likes_user_path(blog), method: :post %>
       <% else %>
-      <%= link_to "お気に入り解除",likes_user_path(blog),method: :delete %>
+      <%= link_to "お気に入り解除", likes_user_path(blog), method: :delete %>
       <% end %>
     </td>
   </tr>

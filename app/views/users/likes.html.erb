@@ -1,11 +1,10 @@
-<h1><%= @user.name %>のお気に入り一覧</h1>
+<h1><%= @user.name %> さんのお気に入り一覧</h1>
 <br>
 <br>
 <br>
 <table>
 
 <% @favorites.each do |favorite| %>
-  <% if current_user.id == favorite.user_id %>
   <tr>
     <td>投稿者→<%= link_to "#{favorite.user.name}", user_path(favorite.user.id) %></td>
     <td>投稿日→<%= favorite.user.created_at.try(:strftime,"%m月%d日") %></td>
@@ -25,7 +24,7 @@
         <%= image_tag favorite.blog.image.url %>
       <% end %>
     </td>
-  <% end %>
+  </tr>
 <% end %>
 
 </table>
