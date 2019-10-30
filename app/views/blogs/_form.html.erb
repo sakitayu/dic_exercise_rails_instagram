@@ -12,15 +12,19 @@
   
   <div class="field">
     <%= form.label :image, "画像" %>
+    <br>
     <%= image_tag(@blog.image.url) if @blog.image && @blog.image.url %>
     <%= form.file_field :image %>
     <%= form.hidden_field :image_cache %>
   </div>
+  <br>
   <div class="blog_content">
     <%= form.label :content, "コメント" %>
+    <br>
     <%= form.text_field :content, size: :"100*30" %>
   </div>
+  <br>
   <%= form.submit "シェアする", class: 'btn btn-primary' %>
 <% end %>
-
-<%= link_to "ブログ一覧画面にもどる", blogs_path %>
+<br>
+<%= link_to "もどる", blogs_path, class: 'btn btn-primary' %>

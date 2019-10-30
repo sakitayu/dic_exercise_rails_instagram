@@ -18,13 +18,17 @@
 </header>
 
 <main>
-<h3>以下の内容でよろしいですか？</h3>
+<h3>以下の内容でシェアしますか？</h3>
 <%= form_with(model: @blog, url: blogs_path, local: true) do |form| %>
   <%= form.hidden_field :content %>
   <p><%= @blog.content %></p>
   <%= image_tag(@blog.image.url) if @blog.image && @blog.image.url %>
   <%= form.hidden_field :image_cache %>
+  <br>
+  <br>
   <%= form.submit "シェアする", class: 'btn btn-primary' %>
+  <br>
+  <br>
   <%= form.submit "戻る", name: 'back', class: 'btn btn-primary' %>
 <% end %>
 </main>
