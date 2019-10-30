@@ -1,3 +1,25 @@
-<h2>ブログを作成する</h2>
+<header>
+  <div class="header_box">
+    <%= link_to blogs_path do %>
+      <%= image_tag "pachi_icon.png", class: 'pachi_icon' %>
+    <% end %>
 
-  <%= render 'form' %>
+    <%= image_tag "header_border.png", class: 'header_border' %>
+
+    <%= link_to blogs_path do %>
+      <%= image_tag "pachi_letter_logo.png", class: 'pachi_letter_logo' %>
+    <% end %>
+
+    <span><%= image_tag "search_icon.png", class: 'search_icon' %>検索</span>
+    <%= image_tag "compass_img.png", class: 'compass_img' %>
+    <%= image_tag "heart_img.png", class: 'heart_img' %>
+    
+    <%= link_to user_path(current_user.id) do %>
+      <%= image_tag "user_img.png", class: 'user_img' %>
+    <% end %>
+  </div>
+</header>
+
+<main>
+<%= render 'form' %>
+</main>

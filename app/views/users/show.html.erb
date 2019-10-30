@@ -1,14 +1,44 @@
-<h1><%= @user.name %> さんのプロフィールページ</h1>
+<header>
+  <div class="header_box">
+    <%= link_to blogs_path do %>
+      <%= image_tag "pachi_icon.png", class: 'pachi_icon' %>
+    <% end %>
+    <%= image_tag "header_border.png", class: 'header_border' %>
+    <%= link_to blogs_path do %>
+      <%= image_tag "pachi_letter_logo.png", class: 'pachi_letter_logo' %>
+    <% end %>
 
-<% if current_user.id == @user.id %>
-<p>メールアドレス: <%= @user.email %></p>
-<% end %>
-<% if @user.image.file.nil? %>
-  <% else %>
-  <%= image_tag @user.image.url %>
-<% end %>
-<br>
-<% if current_user.id == @user.id %>
-<%= link_to "プロフィールを編集", edit_user_path(@user.id) %>
-<% end %>
+    <span><%= image_tag "search_icon.png", class: 'search_icon' %>検索</span>
+    <%= image_tag "compass_img.png", class: 'compass_img' %>
+    <%= image_tag "heart_img.png", class: 'heart_img' %>
+    <%= link_to user_path(current_user.id) do %>
+      <%= image_tag "user_img.png", class: 'user_img' %>
+    <% end %>
+  </div>
+</header>
 
+<main>
+  <h1><%= @user.name %> さんのプロフィールページ</h1>
+  <% if current_user.id == @user.id %>
+    <p><%= link_to "プロフィールを編集", edit_user_path(@user.id) %></p>
+  <% end %>
+
+  <% if @user.image.file.nil? %>
+    <%= image_tag 'no_profile_pic_big.png', class: 'profile_img' %>
+    <% else %>
+    <%= image_tag @user.image.url, class: 'profile_img' %>
+  <% end %>
+
+  <br>
+  <br>
+
+  <% if current_user.id == @user.id %>
+    <%= link_to "お気に入り一覧を見る", likes_user_path(current_user.id) %>
+    <br>
+    <br>
+    <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
+  <% end %>
+  <br>
+  <br>
+  <br>
+</main>

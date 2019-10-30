@@ -1,45 +1,184 @@
-<h1>Pachistagramのほ〜む画面(タイムライン)</h1>
-
-<%= link_to '投稿する', new_blog_path %>
-
-
-<% @blogs.each do |blog| %>
-<br>
-<br>
-<table>
-  <tr>
-    <td>投稿者→<%= link_to "#{blog.user.name}", user_path(blog.user.id) %></td>
-    <td>投稿日→<%= blog.user.created_at.try(:strftime,"%m月%d日") %></td>
-    <td><%= link_to '詳細', blog_path(blog.id) %></td>
-    <% if current_user.id == blog.user.id %>
-    <td><%= link_to "編集", edit_blog_path(blog.id) %></td>
-    <td>
-      <%= link_to '削除', blog_path(blog.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %>
-    </td>
+<header>
+  <div class="header_box">
+    <%= link_to blogs_path do %>
+      <%= image_tag "pachi_icon.png", class: 'pachi_icon' %>
     <% end %>
-  </tr>
-  <tr>
-    <td>
-    <% if blog.image.file.nil? %>
+    <%= image_tag "header_border.png", class: 'header_border' %>
+    <%= link_to blogs_path do %>
+      <%= image_tag "pachi_letter_logo.png", class: 'pachi_letter_logo' %>
+    <% end %>
+
+    <span><%= image_tag "search_icon.png", class: 'search_icon' %>検索</span>
+    <%= image_tag "compass_img.png", class: 'compass_img' %>
+    <%= image_tag "heart_img.png", class: 'heart_img' %>
+    <%= link_to user_path(current_user.id) do %>
+      <%= image_tag "user_img.png", class: 'user_img' %>
+    <% end %>
+  </div>
+</header>
+
+<main>
+
+  <div class="left_box">
+    <div class="share_box">
+      <%= link_to '新しく投稿する', new_blog_path, class: 'btn btn-default btn-block' %>
+    </div>
+    <% @blogs.each do |blog| %>
+    <div class="main_box">
+      <table>
+        <tr>
+          <td>
+            <div class="main_box_head">
+              <% if blog.user.image.file.nil? %>
+                <%= image_tag 'no_profile_pic.png', class: 'contributer_img' %>
+                <% else %>
+                <%= image_tag blog.user.image.url, class: 'contributer_img' %>
+              <% end %>
+              <%= link_to "#{blog.user.name}", user_path(blog.user.id), class: 'contributer' %>
+              <div class="main_box_menu">
+                <%= link_to '投稿へ移動', blog_path(blog.id) %>
+                <% if current_user.id == blog.user.id %>
+                <%= link_to "編集", edit_blog_path(blog.id) %>
+                <%= link_to '削除', blog_path(blog.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %>
+              </div>
+            </div>
+          </td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>
+          <% if blog.image.file.nil? %>
+            <% else %>
+            <%= image_tag blog.image.url, class: 'main_box_img' %>
+          <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <div class="main_box_bottom">
+            <%= image_tag "heart2_img.png", class: 'heart2_img' %>
+            <%= image_tag "comment_img.png", class: 'comment_img' %>
+
+            <% @favorite = current_user.favorites.find_by(blog_id: blog.id) %>
+            <% if @favorite.present? %>
+              <%= link_to favorite_path(id: @favorite.id), method: :delete do %>
+                <%= image_tag "save_on_img.png", class: 'save_img' %>
+              <% end %>
+              <% else %>
+              <%= link_to favorites_path(blog_id: blog.id), method: :post do%>
+                <%= image_tag "save_off_img.png", class: 'save_img' %>
+              <% end %>
+            <% end %>
+
+            <p class="comment">
+              <%= link_to "#{blog.user.name}", user_path(blog.user.id), class: 'contributer' %>
+              <%= blog.content %>
+            </p>
+            <p class="upload_date"><%= blog.user.created_at.try(:strftime,"%m月%d日") %></p>
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="main_box_addcomment">
+              <span>コメントを追加...</span>
+              <div class="add_contribute">投稿する</div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <% end %>
+    <br>
+    <br>
+  </div>
+
+  <div class="right_box">
+    <div class="login_user_profile">
+      <% if current_user.image.file.nil? %>
+        <%= image_tag 'no_profile_pic.png', class: 'login_user_img' %>
       <% else %>
-      <%= image_tag blog.image.url %>
-    <% end %>
-    </td>
-    <td>
-    <% @favorite = current_user.favorites.find_by(blog_id: blog.id) %>
-    <% if @favorite.present? %>
-    <%= link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
-    <% else %>
-    <%= link_to 'お気に入りする', favorites_path(blog_id: blog.id), method: :post, class: 'btn btn-primary' %>
-    <% end %>
-    </td>
-  </tr>
-  <tr>
-    <td>文章→<%= blog.content %></td>
-  </tr>
-</table>
-<% end %>
-</table>
+        <%= image_tag current_user.image.url, class: 'login_user_img' %>
+      <% end %>
+      <div class="login_user_name">
+        <p class="contributer">
+          <%= link_to "#{current_user.name}", user_path(current_user.id), class: 'contributer' %>
+        </p>
+        <p>
+        <%= link_to "#{current_user.name}", user_path(current_user.id), class: 'login_user_name' %>
+        </p>
+      </div>
+    </div>
+    <div class="stories_box">
+      <span>ストーリーズ</span>
+      <p class="stories_box_right">すべて見る</p>
+      <div class="stories_box_users">
+        <div class="stories_user_img_border">
+          <%= image_tag 'trump3.png', class: 'stories_user_img' %>
+        </div>
+        <div class="stories_user_name_date">
+          <p>real_donald_trump</p>
+          <span class="upload_date">13時間前</p>
+        </div>
+      </div>
+      <div class="stories_box_users">
+        <div class="stories_user_img_border">
+          <%= image_tag 'merkel.png', class: 'stories_user_img' %>
+        </div>
+        <div class="stories_user_name_date">
+          <p>ich_bin_merkel</p>
+          <span class="upload_date">2時間前</span>
+        </div>
+      </div>
+      <div class="stories_box_users">
+        <div class="stories_user_img_border">
+          <%= image_tag 'johnson.png', class: 'stories_user_img' %>
+        </div>
+        <div class="stories_user_name_date">
+          <p>johnson_619</p>
+          <span class="upload_date">7時間前</span>
+        </div>
+      </div>
+    </div>
+    <div class="stories_box">
+      <span>おすすめ</span>
+      <p class="stories_box_right">すべて見る</p>
+      <div class="recommend_box_left">
+        <div class="stories_box_users">
+          <div class="recommend_user_img_border">
+            <%= image_tag 'trudeau.png', class: 'stories_user_img' %>
+          </div>
+          <div class="recommend_user_name">
+            <p>trudeau_canada</p>
+            <span class="upload_date">real_donald_trumpのフォ...</p>
+          </div>
+        </div>
+        <div class="stories_box_users">
+          <div class="recommend_user_img_border">
+            <%= image_tag 'conte.png', class: 'stories_user_img' %>
+          </div>
+          <div class="recommend_user_name">
+            <p>giuseppconte</p>
+            <span class="upload_date">macron1221のフォロワー...</span>
+          </div>
+        </div>
+        <div class="stories_box_users">
+          <div class="recommend_user_img_border">
+            <%= image_tag 'morrison.png', class: 'stories_user_img' %>
+          </div>
+          <div class="recommend_user_name">
+            <p>scott_John_morri</p>
+            <span class="upload_date">real_donald_trumpのフォ...</span>
+          </div>
+        </div>
+      </div>
+      <div class="recommend_to_follow">
+        <p>フォローする</p>
+        <p>フォローする</p>
+        <p>フォローする</p>
+      </div>
+    </div>
+  </div>
 
-<br>
+</main>
 

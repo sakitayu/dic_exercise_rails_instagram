@@ -1,16 +1,33 @@
-<h1>詳細画面</h1>
+<header>
+  <div class="header_box">
+    <%= link_to blogs_path do %>
+      <%= image_tag "pachi_icon.png", class: 'pachi_icon' %>
+    <% end %>
+    <%= image_tag "header_border.png", class: 'header_border' %>
+    <%= link_to blogs_path do %>
+      <%= image_tag "pachi_letter_logo.png", class: 'pachi_letter_logo' %>
+    <% end %>
 
-<p id="notice"><%= notice %></p>
+    <span><%= image_tag "search_icon.png", class: 'search_icon' %>検索</span>
+    <%= image_tag "compass_img.png", class: 'compass_img' %>
+    <%= image_tag "heart_img.png", class: 'heart_img' %>
+    <%= link_to user_path(current_user.id) do %>
+      <%= image_tag "user_img.png", class: 'user_img' %>
+    <% end %>
+  </div>
+</header>
 
-<p><%= image_tag @blog.image.url %></p>
-
-<p>文章→<%= @blog.content %></p>
-
-<% if @favorite.present? %>
-  <%= link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
-<% else %>
-  <%= link_to 'お気に入りする', favorites_path(blog_id: @blog.id), method: :post, class: 'btn btn-primary' %>
-<% end %>
-<br>
-<br>
-<%= link_to "ブログ一覧画面にもどる", blogs_path %>
+<main>
+  <p><%= image_tag @blog.image.url %></p>
+  <p><%= @blog.content %></p>
+  <p class="upload_date"><%= @blog.user.created_at.try(:strftime,"%m月%d日") %></p>
+      
+  <% if @favorite.present? %>
+    <%= link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+    <% else %>
+    <%= link_to 'お気に入りする', favorites_path(blog_id: @blog.id), method: :post, class: 'btn btn-primary' %>
+  <% end %>
+  <br>
+  <br>
+  <%= link_to "ブログ一覧画面にもどる", blogs_path %>
+</main>

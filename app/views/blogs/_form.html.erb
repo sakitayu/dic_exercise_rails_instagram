@@ -3,7 +3,6 @@
     <div id="error_explanation">
       <h2><%= @blog.errors.count %>件のエラーがあります。</h2>
       <ul>
-
       <% @blog.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
@@ -11,17 +10,17 @@
     </div>
   <% end %>
   
-  <div class="blog_content">
-    <%= form.label :content %>
-    <%= form.text_field :content %>
-  </div>
   <div class="field">
-    <%= form.label :image %>
+    <%= form.label :image, "画像" %>
     <%= image_tag(@blog.image.url) if @blog.image && @blog.image.url %>
     <%= form.file_field :image %>
     <%= form.hidden_field :image_cache %>
   </div>
-  <%= form.submit %>
+  <div class="blog_content">
+    <%= form.label :content, "コメント" %>
+    <%= form.text_field :content, size: :"100*30" %>
+  </div>
+  <%= form.submit "シェアする", class: 'btn btn-primary' %>
 <% end %>
 
 <%= link_to "ブログ一覧画面にもどる", blogs_path %>

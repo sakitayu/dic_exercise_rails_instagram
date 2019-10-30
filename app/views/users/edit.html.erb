@@ -1,12 +1,36 @@
+<header>
+  <div class="header_box">
+    <%= link_to blogs_path do %>
+      <%= image_tag "pachi_icon.png", class: 'pachi_icon' %>
+    <% end %>
+    
+    <%= image_tag "header_border.png", class: 'header_border' %>
+
+    <%= link_to blogs_path do %>
+      <%= image_tag "pachi_letter_logo.png", class: 'pachi_letter_logo' %>
+    <% end %>
+
+    <span><%= image_tag "search_icon.png", class: 'search_icon' %>検索</span>
+    <%= image_tag "compass_img.png", class: 'compass_img' %>
+    <%= image_tag "heart_img.png", class: 'heart_img' %>
+    
+    <%= link_to user_path(current_user.id) do %>
+      <%= image_tag "user_img.png", class: 'user_img' %>
+    <% end %>
+  </div>
+</header>
+
+<main>
 <%= form_with(model: @user, local: true, url: user_path(@user.id)) do |f| %>  
-  <%= f.label :'名前' %>
   <br>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <br>
+  <p>メールアドレス: <%= @user.email %></p>
   <%= f.label :'アカウント画像' %>
   <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
   <%= f.file_field :image %>
   <%= f.hidden_field :image_cache %>
   <%= f.submit "更新する" %>
 <% end %>
+</main>
