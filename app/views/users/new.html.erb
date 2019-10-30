@@ -1,5 +1,3 @@
-<h1>登録する</h1>
-
 <% if @user.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@user.errors.count, "error") %> prohibited this @user from being saved:</h2>
@@ -11,23 +9,37 @@
   </div>
 <% end %>
 
-<%= form_with(model: @user, local: true) do |f| %>  
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-
-  <%= f.label :image %>
-  <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
-  <%= f.file_field :image %>
-  <%= f.hidden_field :image_cache %>
-
-  <%= f.submit "登録する" %>
-<% end %>
+<div class="signup_box">
+  <%= image_tag "pachi_letter_logo.png", class: 'pachi_letter_logo_login_img' %>
+  <p>友達の動画や写真をチェックしよう</p>
+  <div class="login_forms">
+    <%= form_with(model: @user, local: true) do |f| %>  
+      <%= f.label :name %>
+      <span> : </span>
+      <%= f.text_field :name %>
+      <br>
+      <%= f.label :email %>
+      <span> : </span>
+      <%= f.email_field :email %>
+      <br>
+      <%= f.label :password %>
+      <span> : </span>
+      <%= f.password_field :password %>
+      <br>
+      <%= f.label :password_confirmation %>
+      <span> : </span>
+      <%= f.password_field :password_confirmation %>
+      <br>
+      <%= f.submit "登録する", class: 'btn btn-primary btn-block' %>
+    <% end %>
+  </div>
+  <div class="signup_regulation">
+  <span>登録することで、Fakebookの利用</span><br>
+  <span>規約、データに関するポリシー、</span><br>
+  <span>Cokkieポリシーに同意したこと</span><br>
+  <span>には特になりません(適当)</span>
+  </div>
+</div>
+<div class="login_box_mini">
+  <span>アカウントをお持ちですか？ </span><%= link_to 'ログインする', new_session_path, class: 'login_link' %>
+</div>

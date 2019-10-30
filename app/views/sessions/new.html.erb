@@ -1,11 +1,22 @@
-<h1>ログイン</h1>
-<%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
+<div class="login_box">
+  <%= image_tag "pachi_letter_logo.png", class: 'pachi_letter_logo_login_img' %>
+  <p> </p>
+  <div class="login_forms">
+  <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
 
-  <%= f.label :email, "Eメール" %>
-  <%= f.email_field :email %>
+    <%= f.label :email, "Eメール" %>
+    <%= f.email_field :email %>
 
-  <%= f.label :password, "パスワード" %>
-  <%= f.password_field :password %>
+    <%= f.label :password, "パスワード" %>
+    <%= f.password_field :password %>
 
-  <%= f.submit "ログイン" %>
-<% end %>
+    <%= f.submit "ログイン", class: 'btn btn-primary btn-block' %>
+  <% end %>
+  </div>
+  <div class="forgot_pass">
+    <span>パスワードを忘れた場合</span>
+  </div>
+</div>
+<div class="login_box_mini">
+  <span>アカウントをお持ちでないすか？ </span><%= link_to '登録する', new_user_path, class: 'login_link' %>
+</div>

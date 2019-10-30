@@ -336,3 +336,72 @@ main {
   float:left;
   width:180px;
 }
+
+.signup_box {
+  width:340px;
+  height:530px;
+  background-color: white;
+  border: 1px solid #DBDBDB;
+  border-radius: 3px;
+  margin: 30px auto 0 auto;
+  padding:20px 30px;
+}
+
+.login_box {
+  width:340px;
+  height:330px;
+  background-color: white;
+  border: 1px solid #DBDBDB;
+  border-radius: 3px;
+  margin: 30px auto 0 auto;
+  padding:20px 30px;
+}
+
+.signup_box p {
+  color:#999999;
+  font-size:18px;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom:10px;
+}
+
+.pachi_letter_logo_login_img {
+  width:280px;
+  margin-bottom: 20px;
+}
+
+.login_forms {
+  text-align: right;
+}
+
+.login_forms label {
+  margin-bottom:20px;
+}
+
+.signup_regulation {
+  padding:30px;
+  color:#999999;
+  font-size:14px;
+  text-align: center;
+}
+
+.login_box_mini {
+  width:340px;
+  height:60px;
+  background-color: white;
+  border: 1px solid #DBDBDB;
+  border-radius: 3px;
+  margin: 14px auto;
+  padding:20px 30px;
+}
+
+.login_link {
+  font-weight: bold;
+}
+
+.forgot_pass {
+  color:#385185;
+  font-size: 12px;
+  text-align: center;
+  margin-top:30px;
+}
