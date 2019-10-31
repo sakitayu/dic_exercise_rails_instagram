@@ -338,7 +338,7 @@ main {
 }
 
 .signup_box {
-  width:340px;
+  width:350px;
   height:530px;
   background-color: white;
   border: 1px solid #DBDBDB;
@@ -348,7 +348,7 @@ main {
 }
 
 .login_box {
-  width:340px;
+  width:350px;
   height:330px;
   background-color: white;
   border: 1px solid #DBDBDB;
