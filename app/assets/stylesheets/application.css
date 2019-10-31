@@ -98,11 +98,11 @@ main {
 }
 
 .share_box {
-  margin-top:1px;
+  margin-top:3px;
 }
 
 .main_box {
-  margin-top:20px;
+  margin-top:28px;
   border: 1px solid #DBDBDB;
   border-radius: 3px;
 }
@@ -243,7 +243,7 @@ main {
 .stories_box {
   height:230px;
   background-color: white;
-  margin-top:30px;
+  margin-top:20px;
   padding:12px 15px;
   border: 1px solid #DBDBDB;
   border-radius: 3px;
@@ -406,11 +406,14 @@ main {
   margin-top:30px;
 }
 
-.error {
-  width:300px;
-  margin:0 auto;
+footer {
+  color:#C7C7C7;
+  font-size: 11px;
+  margin-top:15px;
+  padding:1px;
 }
 
-.error p {
-  font-size:25px;
+footer p {
+  margin:0 0 3px 0;
+  padding:0;
 }
