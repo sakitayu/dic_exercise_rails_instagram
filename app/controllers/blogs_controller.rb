@@ -15,7 +15,7 @@ class BlogsController < ApplicationController
       render :new
     else
       if @blog.save
-        ConfirmMailer.confirm_mail(@blog).deliver
+        ConfirmMailer.confirm_mail(@blog, current_user).deliver
         redirect_to blogs_path
       else
         render 'new'
