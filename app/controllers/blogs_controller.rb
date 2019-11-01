@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  before_action :set_blog, only: [:show, :update, :destroy]
 
   def index
     @blogs = Blog.all.order(id: "desc")
@@ -28,6 +28,10 @@ class BlogsController < ApplicationController
   end
 
   def edit
+    # 他人の投稿を編集できないように制限
+    if Blog.find(params[:id]).user.name == current_user.name
+      @blog = Blog.find(params[:id])
+    end
   end
 
   def update
