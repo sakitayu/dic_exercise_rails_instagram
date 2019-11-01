@@ -23,7 +23,7 @@
       <% else %>
       <%= image_tag @blog.image.url %>
       <% end %>
-    </p>
+  </p>
   <p><%= @blog.content %></p>
   <p class="upload_date"><%= @blog.user.created_at.try(:strftime,"%m月%d日") %></p>
       
