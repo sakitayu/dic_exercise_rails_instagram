@@ -28,7 +28,7 @@
 <% @favorites.each do |favorite| %>
 <table>
   <tr>
-    <td>投稿者→<%= link_to "#{favorite.user.name}", user_path(favorite.user.id) %></td>
+    <td>投稿者→<%= link_to "#{favorite.blog.user.name}", user_path(favorite.blog.user.id) %></td>
     <td><%= link_to '詳細', blog_path(favorite.blog.id) %></td>
   </tr>
   <tr>
