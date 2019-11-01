@@ -16,11 +16,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    #@user = User.find(params[:id])
   end
 
   def edit
-    #@user = User.find(params[:id])
   end
 
   def update
@@ -34,7 +32,6 @@ class UsersController < ApplicationController
 
   #お気に入り投稿一覧取得
   def likes
-    #@user = User.find(params[:id])
     @favorites = User.find(current_user.id).favorites.order(id: "desc")
   end
 
