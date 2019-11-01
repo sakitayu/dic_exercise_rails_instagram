@@ -21,23 +21,15 @@
 </header>
 
 <main>
-<h1><%= @user.name %> さんのお気に入り一覧</h1>
+<h1><%= current_user.name %> さんのお気に入り一覧</h1>
 <br>
 <br>
 <br>
-<table>
 <% @favorites.each do |favorite| %>
+<table>
   <tr>
     <td>投稿者→<%= link_to "#{favorite.user.name}", user_path(favorite.user.id) %></td>
-    <td>投稿日→<%= favorite.user.created_at.try(:strftime,"%m月%d日") %></td>
-    <td>文章→<%= favorite.blog.content %></td>
     <td><%= link_to '詳細', blog_path(favorite.blog.id) %></td>
-    <% if current_user.id == favorite.user.id %>
-      <td><%= link_to "編集", edit_blog_path(favorite.blog.id) %></td>
-      <td>
-        <%= link_to '削除', blog_path(favorite.blog.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %>
-      </td>
-    <% end %>
   </tr>
   <tr>
     <td>
@@ -46,6 +38,14 @@
         <%= image_tag favorite.blog.image.url %>
       <% end %>
     </td>
+  </tr>
+  <tr>
+    <td>
+      <%= favorite.user.created_at.try(:strftime,"%m月%d日") %> 
+      <%= favorite.blog.content %>
+    </td> 
+  </tr>
+  <tr>
     <td>
     <% @favorite = current_user.favorites.find_by(blog_id: favorite.blog.id) %>
     <% if @favorite.present? %>
@@ -55,8 +55,11 @@
     <% end %>
     </td>
   </tr>
-<% end %>
+  <br>
+  <br>
+  <br>
 </table>
+<% end %>
 <br>
 <br>
 </main>
