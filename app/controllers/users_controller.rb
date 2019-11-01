@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :likes]
 
   def new
     @user = User.new
@@ -15,11 +16,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id])
   end
 
   def update
@@ -33,7 +34,7 @@ class UsersController < ApplicationController
 
   #お気に入り投稿一覧取得
   def likes
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id])
     @favorites = User.find(current_user.id).favorites.order(id: "desc")
   end
 
@@ -47,7 +48,11 @@ class UsersController < ApplicationController
   def correct_user
     user = User.find(params[:id])
     if current_user != user
-      redirect_to "/"
+      redirect_to "/blogs"
     end
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end
