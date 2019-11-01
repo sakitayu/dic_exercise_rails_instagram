@@ -31,6 +31,8 @@ class BlogsController < ApplicationController
     # 他人の投稿を編集できないように制限
     if Blog.find(params[:id]).user.name == current_user.name
       @blog = Blog.find(params[:id])
+    else
+      redirect_to blogs_path
     end
   end
 
